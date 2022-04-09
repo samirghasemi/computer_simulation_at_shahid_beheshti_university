@@ -73,13 +73,14 @@ def req3():
     p = float(input("enter the probability of edge creation : "))
 
     graph = nx.erdos_renyi_graph(n=num_of_nodes, p=p)
-    graph_init = graph.copy()
+    nx.draw(graph, with_labels=True)
+    plt.show()
+
     fitness = []
-    # nx.draw(graph, with_labels=True)
-    # plt.show()
     for n in range(num_of_nodes):
         fitness.append(random.random())
-    for i in range(10):
+
+    for i in range(num_of_nodes**2):
         edges = list(graph.edges)
         nonedges = list(nx.non_edges(graph))
         # random edge choice
@@ -96,11 +97,11 @@ def req3():
         list_of_neighbours = sort_tuple(list_of_neighbours)
         chosen_node = list_of_neighbours[-1][0]
         # chosen_nonedge = random.choice([x for x in nonedges if chosen_edge[0] == x[0]])
-        print(chosen_edge[0], chosen_edge[1])
+        # print(chosen_edge[0], chosen_edge[1])
         graph.remove_edge(chosen_edge[0], chosen_edge[1])
         # add new edge
         graph.add_edge(chosen_edge[0], chosen_node)
-        print(chosen_edge[0], chosen_node)
+        # print(chosen_edge[0], chosen_node)
 
     nx.draw(graph, with_labels=True)
     plt.show()
